@@ -18,6 +18,16 @@ In recent years, I’ve focused on enhancing testing efficiency by integrating *
 
 ---
 
+🧠 My QA Philosophy: Curiosity Drives Quality
+
+While tools, frameworks, and test cases are essential, I believe curiosity is the most underrated and most powerful skill in QA.
+
+A curious tester doesn’t just execute scripts. They explore. They question. They think like the user and look beyond what's written in the requirements. It's this mindset that often uncovers the edge cases and hidden bugs others miss.
+
+Some of the most impactful issues I’ve found weren’t from planned test cases but from asking “what if?” and digging just a little deeper.
+
+---
+
 ## 🏆 Highlights & Achievements
 
 - Integrated GenAI into QA workflows for faster test coverage  
