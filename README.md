@@ -18,7 +18,7 @@ In recent years, I’ve focused on enhancing testing efficiency by integrating *
 
 ---
 
-🧠 My QA Philosophy: Curiosity Drives Quality
+## 🧠 My QA Philosophy: Curiosity Drives Quality
 
 While tools, frameworks, and test cases are essential, I believe curiosity is the most underrated and most powerful skill in QA.
 
