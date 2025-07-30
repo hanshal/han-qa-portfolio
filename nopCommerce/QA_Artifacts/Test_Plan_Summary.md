@@ -1,3 +1,0 @@
-# Test Plan Summary
-
-You can view the complete test plan here: [Test Plan Summary](https://docs.google.com/document/d/1YX9XJfKscuFO91rXRIx0K6lAFQxI0A4QXOQmfU1Hlf4/edit?tab=t.0)
