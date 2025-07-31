@@ -1,0 +1,65 @@
+{
+  "validUser": {
+    "personalDetails": {
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john.doe.{{timestamp}}@example.com",
+      "telephone": "1234567890",
+      "fax": "test fax"
+    },
+    "addressDetails": {
+      "company": "Company Inc.",
+      "address1": "123 Main St",
+      "address2": "address2",
+      "city": "London",
+      "region": "Greater London",
+      "postcode": "SW1A 1AA",
+      "country": "United Kingdom"
+    },
+    "loginDetails": {
+      "loginName": "johndoe{{timestamp}}",
+      "password": "Password123!",
+      "confirmPassword": "Password123!"
+    },
+    "newsletter": true
+  },
+  "minimalValidUser": {
+    "personalDetails": {
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "email": "jane.smith.{{timestamp}}@example.com",
+      "telephone": "",
+      "fax": ""
+    },
+    "addressDetails": {
+      "company": "",
+      "address1": "456 Oak Street",
+      "address2": "",
+      "city": "Manchester",
+      "region": "Greater Manchester",
+      "postcode": "M1 1AA",
+      "country": "United Kingdom"
+    },
+    "loginDetails": {
+      "loginName": "janesmith{{timestamp}}",
+      "password": "SimplePass123!",
+      "confirmPassword": "SimplePass123!"
+    },
+    "newsletter": false
+  },
+  "errorMessages": {
+    "requiredFields": {
+      "firstName": "First Name must be between 1 and 32 characters!",
+      "lastName": "Last Name must be between 1 and 32 characters!",
+      "email": "Email Address does not appear to be valid!",
+      "address1": "Address 1 must be between 3 and 128 characters!",
+      "city": "City must be between 3 and 128 characters!",
+      "region": "Please select a region / state!",
+      "postcode": "Zip/postal code must be between 3 and 10 characters!",
+      "loginName": "Login name must be alphanumeric only and between 5 and 64 characters!",
+      "password": "Password must be between 4 and 20 characters!",
+      "privacyPolicy": "You must agree to the Privacy Policy!",
+      "passwordMismatch": "Password confirmation does not match"
+    }
+  }
+}
