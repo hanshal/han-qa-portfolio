@@ -1,7 +1,4 @@
-/**
- * Simple Base Page class for common page functionality
- * All page objects can extend this class for basic shared methods
- */
+// Base Page Object for common page functionality
 class BasePage {
   constructor() {
     this.url = '';

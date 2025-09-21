@@ -1,11 +1,11 @@
-// Import commands.js
+// Cypress E2E Support Configuration
+
 import './commands'
 
-// Global Cypress configuration
+// Global configuration
 Cypress.config('scrollBehavior', 'center');
 
 // Handle uncaught exceptions
 Cypress.on('uncaught:exception', (err, runnable) => {
-    // Prevent Cypress from failing the test on uncaught exceptions
     return false;
 });

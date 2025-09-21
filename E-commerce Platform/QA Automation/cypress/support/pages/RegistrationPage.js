@@ -1,12 +1,13 @@
 const BasePage = require('./BasePage');
 
+// Page Object for User Registration functionality
 class RegistrationPage extends BasePage {
   constructor() {
     super();
     this.baseUrl = 'https://automationteststore.com/';
-    this.url = this.baseUrl; // Start from base URL
+    this.url = this.baseUrl;
 
-    // Page elements - using ID selectors for better performance
+    // Page element selectors
     this.elements = {
       // Navigation elements
       loginRegisterButton: '#customernav a[href*="account/login"]',
@@ -47,13 +48,14 @@ class RegistrationPage extends BasePage {
     };
   }
 
-
+  // Visit homepage and navigate to registration page
   visit() {
     cy.logStep('Starting registration flow from home page');
-    super.visit(); // Visit base URL
+    super.visit();
     this.navigateToRegistrationPage();
   }
 
+  // Navigate through UI flow to reach registration form
   navigateToRegistrationPage() {
     cy.logStep('Navigating to registration page through proper flow');
     
@@ -78,10 +80,10 @@ class RegistrationPage extends BasePage {
       .should('be.visible')
       .click();
     
-    // Verify we're now on the registration page
     this.verifyPageLoaded();
   }
 
+  // Verify registration page has loaded correctly
   verifyPageLoaded() {
     cy.logStep('Verifying registration page is loaded');
     cy.get(this.elements.firstName).should('be.visible');
@@ -89,6 +91,7 @@ class RegistrationPage extends BasePage {
     cy.url().should('include', 'account/create');
   }
 
+  // Fill personal details section of registration form
   fillPersonalDetails(personalData) {
     cy.logStep('Filling personal details');
     const { firstName, lastName, email, telephone, fax } = personalData;
@@ -100,6 +103,7 @@ class RegistrationPage extends BasePage {
     cy.fillField(this.elements.fax, fax);
   }
 
+  // Fill address details section of registration form
   fillAddressDetails(addressData) {
     cy.logStep('Filling address details');
     const { company, address1, address2, city, region, postcode, country } = addressData;
@@ -121,6 +125,7 @@ class RegistrationPage extends BasePage {
     cy.fillField(this.elements.postcode, postcode);
   }
 
+  // Fill login credentials section of registration form
   fillLoginDetails(loginData) {
     cy.logStep('Filling login details');
     const { loginName, password, confirmPassword } = loginData;
@@ -130,6 +135,7 @@ class RegistrationPage extends BasePage {
     cy.fillField(this.elements.confirmPassword, confirmPassword);
   }
 
+  // Set newsletter subscription preference
   selectNewsletter(subscribe) {
     cy.logStep(`Setting newsletter preference: ${subscribe}`);
     if (subscribe) {
@@ -139,18 +145,20 @@ class RegistrationPage extends BasePage {
     }
   }
 
+  // Accept privacy policy terms
   agreeToPrivacyPolicy() {
     cy.logStep('Agreeing to privacy policy');
     cy.clickElement(this.elements.privacyPolicy);
   }
 
+  // Submit the registration form
   submitForm() {
     cy.logStep('Submitting registration form');
     cy.clickElement(this.elements.submitButton);
   }
 
+  // Complete entire registration process with provided user data
   completeRegistration(userData) {
-    // Fill all form sections
     this.fillPersonalDetails(userData.personalDetails);
     this.fillAddressDetails(userData.addressDetails);
     this.fillLoginDetails(userData.loginDetails);
@@ -163,10 +171,10 @@ class RegistrationPage extends BasePage {
     this.submitForm();
   }
 
+  // Verify that registration completed successfully
   verifyRegistrationSuccess() {
     cy.logStep('Verifying registration success');
     
-    // Check for success indicators (URL change or success message)
     cy.url().should('satisfy', (url) => {
       return url.includes('success') || 
              url.includes('account') || 
@@ -174,10 +182,10 @@ class RegistrationPage extends BasePage {
              !url.includes('create');
     });
     
-    // Take screenshot for evidence
     cy.takeScreenshot('registration-success');
   }
 
+  // Verify error messages for required fields are displayed
   verifyRequiredFieldErrors(errorMessages) {
     cy.logStep('Verifying required field error messages');
     
@@ -197,6 +205,7 @@ class RegistrationPage extends BasePage {
     cy.verifyFieldError(this.elements.password, errorMessages.password);
   }
 
+  // Verify privacy policy agreement error message
   verifyPrivacyPolicyError(expectedMessage = 'You must agree to the Privacy Policy!') {
     cy.logStep('Verifying privacy policy error');
     cy.get(this.elements.errorAlert)
@@ -204,16 +213,19 @@ class RegistrationPage extends BasePage {
       .and('contain.text', expectedMessage);
   }
 
+  // Verify password confirmation mismatch error
   verifyPasswordMismatchError(expectedMessage = 'Password confirmation does not match') {
     cy.logStep('Verifying password mismatch error');
     cy.get('body').should('contain.text', expectedMessage);
   }
 
+  // Verify form groups have error styling applied
   verifyFormGroupErrors() {
     cy.logStep('Verifying form group error styling');
     cy.get(this.elements.formGroupErrors).should('have.length.greaterThan', 0);
   }
 
+  // Verify error for attempting to register with existing email
   verifyExistingEmailError(expectedMessage = 'E-Mail Address is already registered!') {
     cy.logStep('Verifying existing email error message');
     cy.get(this.elements.errorAlert)
@@ -221,14 +233,13 @@ class RegistrationPage extends BasePage {
       .and('contain.text', expectedMessage);
   }
 
+  // Verify error for attempting to register with existing username
   verifyExistingUsernameError(expectedMessage = 'This login name is not available. Try different login name!') {
     cy.logStep('Verifying existing username error message');
-    // Check for the help-block span that contains the username error
     cy.get(this.elements.helpBlock)
       .should('be.visible')
       .and('contain.text', expectedMessage);
     
-    // Also verify the form group has error styling
     cy.get(this.elements.loginName)
       .parent()
       .parent()

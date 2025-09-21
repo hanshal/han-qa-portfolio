@@ -1,11 +1,11 @@
 const RegistrationPage = require('../../support/pages/RegistrationPage');
 
+// Test Suite: User Registration Functionality
 describe('Registration Page Tests', () => {
   let registrationPage;
   let testData;
 
   before(() => {
-    // Load test data from fixtures
     cy.fixture('RegistrationData').then((data) => {
       testData = data;
     });
@@ -16,9 +16,10 @@ describe('Registration Page Tests', () => {
     registrationPage.visit();
   });
 
+  // Happy Path Tests
   describe('Successful Registration', () => {
+    // TC_REG_001: Complete registration with all fields
     it('Register a new user with valid complete data', () => {
-      // Generate unique data for this test run
       cy.generateUniqueUserData(
         testData.validUser.personalDetails.email,
         testData.validUser.loginDetails.loginName
@@ -37,16 +38,13 @@ describe('Registration Page Tests', () => {
           newsletter: testData.validUser.newsletter
         };
 
-        // Complete registration process
         registrationPage.completeRegistration(userData);
-        
-        // Verify successful registration
         registrationPage.verifyRegistrationSuccess();
       });
     });
 
+    // TC_REG_002: Minimal data registration
     it('Register a new user with minimal required data', () => {
-      // Generate unique data for minimal user
       cy.generateUniqueUserData(
         testData.minimalValidUser.personalDetails.email,
         testData.minimalValidUser.loginDetails.loginName
@@ -63,35 +61,27 @@ describe('Registration Page Tests', () => {
           }
         };
 
-        // Complete registration with minimal data
         registrationPage.completeRegistration(userData);
-
-        // Verify successful registration
         registrationPage.verifyRegistrationSuccess();
       });
     });
   });
 
+  // Negative Tests
   describe('Registration Validation Errors', () => {
+    // TC_REG_003: Required field validation
     it('Display error messages for all missing required fields', () => {
-      // Submit form without filling any required fields
       registrationPage.submitForm();
       
-      // Verify all required field error messages using test data
       registrationPage.verifyRequiredFieldErrors(testData.errorMessages.requiredFields);
-      
-      // Verify Privacy Policy error using test data
       registrationPage.verifyPrivacyPolicyError(testData.errorMessages.requiredFields.privacyPolicy);
-      
-      // Verify form groups have error styling
       registrationPage.verifyFormGroupErrors();
       
-      // Take screenshot for documentation
       cy.takeScreenshot('validation-errors-all-fields');
     });
 
+    // TC_REG_004: Password mismatch validation
     it('Display error message when passwords do not match', () => {
-      // Generate unique data
       cy.generateUniqueUserData(
         testData.validUser.personalDetails.email,
         testData.validUser.loginDetails.loginName
@@ -105,24 +95,20 @@ describe('Registration Page Tests', () => {
           loginDetails: {
             ...testData.validUser.loginDetails,
             loginName: uniqueData.loginName,
-            confirmPassword: 'DifferentPassword123!' // Intentionally different
+            confirmPassword: 'DifferentPassword123!'
           },
           newsletter: false
         };
         
-        // Complete registration with mismatched passwords
         registrationPage.completeRegistration(userData);
-        
-        // Verify password mismatch error using test data
         registrationPage.verifyPasswordMismatchError(testData.errorMessages.requiredFields.passwordMismatch);
         
-        // Take screenshot for documentation
         cy.takeScreenshot('password-mismatch-error');
       });
     });
 
+    // TC_REG_005: Duplicate email prevention
     it('Display error message when registering with existing email address', () => {
-      // Generate unique username but use existing email
       cy.generateUniqueUserData(
         testData.validUser.personalDetails.email,
         testData.validUser.loginDetails.loginName
@@ -130,29 +116,25 @@ describe('Registration Page Tests', () => {
         const userData = {
           personalDetails: {
             ...testData.validUser.personalDetails,
-            email: testData.existingUser.email // Use the known existing email
+            email: testData.existingUser.email
           },
           addressDetails: testData.validUser.addressDetails,
           loginDetails: {
             ...testData.validUser.loginDetails,
-            loginName: uniqueData.loginName // Use unique username
+            loginName: uniqueData.loginName
           },
           newsletter: false
         };
         
-        // Complete registration with existing email
         registrationPage.completeRegistration(userData);
-        
-        // Verify existing email error using test data
         registrationPage.verifyExistingEmailError(testData.errorMessages.existingData.existingEmail);
         
-        // Take screenshot for documentation
         cy.takeScreenshot('existing-email-error');
       });
     });
 
+    // TC_REG_006: Duplicate username prevention
     it('Display error message when registering with existing username', () => {
-      // Generate unique email but use existing username
       cy.generateUniqueUserData(
         testData.validUser.personalDetails.email,
         testData.validUser.loginDetails.loginName
@@ -160,32 +142,25 @@ describe('Registration Page Tests', () => {
         const userData = {
           personalDetails: {
             ...testData.validUser.personalDetails,
-            email: uniqueData.email // Use unique email
+            email: uniqueData.email
           },
           addressDetails: testData.validUser.addressDetails,
           loginDetails: {
             ...testData.validUser.loginDetails,
-            loginName: testData.existingUser.loginName // Use the known existing username
+            loginName: testData.existingUser.loginName
           },
           newsletter: false
         };
         
-        // Complete registration with existing username
         registrationPage.completeRegistration(userData);
-        
-        // Verify existing username error using test data
         registrationPage.verifyExistingUsernameError(testData.errorMessages.existingData.existingUsername);
         
-        // Take screenshot for documentation
         cy.takeScreenshot('existing-username-error');
       });
     });
   });
 
-
-  // Test cleanup - clear any test data if needed
   afterEach(() => {
-    // Clear any remaining form data
     cy.clearCookies();
     cy.clearLocalStorage();
   });
