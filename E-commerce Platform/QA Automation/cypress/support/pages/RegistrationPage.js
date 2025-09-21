@@ -3,10 +3,16 @@ const BasePage = require('./BasePage');
 class RegistrationPage extends BasePage {
   constructor() {
     super();
-    this.url = 'https://automationteststore.com/index.php?rt=account/create';
+    this.baseUrl = 'https://automationteststore.com/';
+    this.url = this.baseUrl; // Start from base URL
 
     // Page elements - using ID selectors for better performance
     this.elements = {
+      // Navigation elements
+      loginRegisterButton: '#customernav a[href*="account/login"]',
+      continueButton: '#accountFrm button[title="Continue"]',
+      registerRadio: '#accountFrm_accountregister',
+
       // Personal details
       firstName: '#AccountFrm_firstname',
       lastName: '#AccountFrm_lastname',
@@ -36,18 +42,48 @@ class RegistrationPage extends BasePage {
       
       // Error containers
       errorAlert: '.alert-error, .alert-danger',
-      formGroupErrors: '.form-group.has-error'
+      formGroupErrors: '.form-group.has-error',
+      helpBlock: '.help-block'
     };
   }
 
 
   visit() {
-    cy.logStep('Navigating to registration page');
-    super.visit();
+    cy.logStep('Starting registration flow from home page');
+    super.visit(); // Visit base URL
+    this.navigateToRegistrationPage();
+  }
+
+  navigateToRegistrationPage() {
+    cy.logStep('Navigating to registration page through proper flow');
+    
+    // Step 1: Click on "Login or register" button
+    cy.logStep('Clicking on Login or register button');
+    cy.get(this.elements.loginRegisterButton)
+      .should('be.visible')
+      .click();
+    
+    // Verify we're on the login page
+    cy.url().should('include', 'account/login');
+    
+    // Step 2: Ensure "Register Account" radio button is selected (it should be by default)
+    cy.logStep('Ensuring Register Account option is selected');
+    cy.get(this.elements.registerRadio)
+      .should('be.visible')
+      .should('be.checked'); // Should be checked by default
+    
+    // Step 3: Click Continue button to proceed to registration form
+    cy.logStep('Clicking Continue button to proceed to registration');
+    cy.get(this.elements.continueButton)
+      .should('be.visible')
+      .click();
+    
+    // Verify we're now on the registration page
     this.verifyPageLoaded();
   }
 
   verifyPageLoaded() {
+    cy.logStep('Verifying registration page is loaded');
     cy.get(this.elements.firstName).should('be.visible');
     cy.get(this.elements.submitButton).should('be.visible');
     cy.url().should('include', 'account/create');
@@ -176,6 +212,27 @@ class RegistrationPage extends BasePage {
   verifyFormGroupErrors() {
     cy.logStep('Verifying form group error styling');
     cy.get(this.elements.formGroupErrors).should('have.length.greaterThan', 0);
+  }
+
+  verifyExistingEmailError(expectedMessage = 'E-Mail Address is already registered!') {
+    cy.logStep('Verifying existing email error message');
+    cy.get(this.elements.errorAlert)
+      .should('be.visible')
+      .and('contain.text', expectedMessage);
+  }
+
+  verifyExistingUsernameError(expectedMessage = 'This login name is not available. Try different login name!') {
+    cy.logStep('Verifying existing username error message');
+    // Check for the help-block span that contains the username error
+    cy.get(this.elements.helpBlock)
+      .should('be.visible')
+      .and('contain.text', expectedMessage);
+    
+    // Also verify the form group has error styling
+    cy.get(this.elements.loginName)
+      .parent()
+      .parent()
+      .should('have.class', 'has-error');
   }
 }
 

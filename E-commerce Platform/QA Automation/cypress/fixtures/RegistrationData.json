@@ -47,6 +47,10 @@
     },
     "newsletter": false
   },
+  "existingUser": {
+    "email": "hanshal.hn@gmail.com",
+    "loginName": "Houzour"
+  },
   "errorMessages": {
     "requiredFields": {
       "firstName": "First Name must be between 1 and 32 characters!",
@@ -60,6 +64,10 @@
       "password": "Password must be between 4 and 20 characters!",
       "privacyPolicy": "You must agree to the Privacy Policy!",
       "passwordMismatch": "Password confirmation does not match"
+    },
+    "existingData": {
+      "existingEmail": "E-Mail Address is already registered!",
+      "existingUsername": "This login name is not available. Try different login name!"
     }
   }
 }

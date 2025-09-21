@@ -17,7 +17,7 @@ describe('Registration Page Tests', () => {
   });
 
   describe('Successful Registration', () => {
-    it('should register a new user with valid complete data', () => {
+    it('Register a new user with valid complete data', () => {
       // Generate unique data for this test run
       cy.generateUniqueUserData(
         testData.validUser.personalDetails.email,
@@ -45,7 +45,7 @@ describe('Registration Page Tests', () => {
       });
     });
 
-    it('should register a new user with minimal required data', () => {
+    it('Register a new user with minimal required data', () => {
       // Generate unique data for minimal user
       cy.generateUniqueUserData(
         testData.minimalValidUser.personalDetails.email,
@@ -72,8 +72,8 @@ describe('Registration Page Tests', () => {
     });
   });
 
-  describe('Validation Errors', () => {
-    it('should display error messages for all missing required fields', () => {
+  describe('Registration Validation Errors', () => {
+    it('Display error messages for all missing required fields', () => {
       // Submit form without filling any required fields
       registrationPage.submitForm();
       
@@ -90,7 +90,7 @@ describe('Registration Page Tests', () => {
       cy.takeScreenshot('validation-errors-all-fields');
     });
 
-    it('should display error message when passwords do not match', () => {
+    it('Display error message when passwords do not match', () => {
       // Generate unique data
       cy.generateUniqueUserData(
         testData.validUser.personalDetails.email,
@@ -118,6 +118,66 @@ describe('Registration Page Tests', () => {
         
         // Take screenshot for documentation
         cy.takeScreenshot('password-mismatch-error');
+      });
+    });
+
+    it('Display error message when registering with existing email address', () => {
+      // Generate unique username but use existing email
+      cy.generateUniqueUserData(
+        testData.validUser.personalDetails.email,
+        testData.validUser.loginDetails.loginName
+      ).then((uniqueData) => {
+        const userData = {
+          personalDetails: {
+            ...testData.validUser.personalDetails,
+            email: testData.existingUser.email // Use the known existing email
+          },
+          addressDetails: testData.validUser.addressDetails,
+          loginDetails: {
+            ...testData.validUser.loginDetails,
+            loginName: uniqueData.loginName // Use unique username
+          },
+          newsletter: false
+        };
+        
+        // Complete registration with existing email
+        registrationPage.completeRegistration(userData);
+        
+        // Verify existing email error using test data
+        registrationPage.verifyExistingEmailError(testData.errorMessages.existingData.existingEmail);
+        
+        // Take screenshot for documentation
+        cy.takeScreenshot('existing-email-error');
+      });
+    });
+
+    it('Display error message when registering with existing username', () => {
+      // Generate unique email but use existing username
+      cy.generateUniqueUserData(
+        testData.validUser.personalDetails.email,
+        testData.validUser.loginDetails.loginName
+      ).then((uniqueData) => {
+        const userData = {
+          personalDetails: {
+            ...testData.validUser.personalDetails,
+            email: uniqueData.email // Use unique email
+          },
+          addressDetails: testData.validUser.addressDetails,
+          loginDetails: {
+            ...testData.validUser.loginDetails,
+            loginName: testData.existingUser.loginName // Use the known existing username
+          },
+          newsletter: false
+        };
+        
+        // Complete registration with existing username
+        registrationPage.completeRegistration(userData);
+        
+        // Verify existing username error using test data
+        registrationPage.verifyExistingUsernameError(testData.errorMessages.existingData.existingUsername);
+        
+        // Take screenshot for documentation
+        cy.takeScreenshot('existing-username-error');
       });
     });
   });
