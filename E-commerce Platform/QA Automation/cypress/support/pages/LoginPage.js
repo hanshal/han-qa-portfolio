@@ -22,10 +22,6 @@ class LoginPage extends BasePage {
       forgotPasswordLink: 'a[href*="account/forgotten/password"]',
       forgotLoginLink: 'a[href*="account/forgotten/loginname"]',
       
-      // Headers and labels
-      returningCustomerHeader: '.returningcustomer h2.heading2',
-      loginBoxHeader: '.loginbox h4.heading4',
-      
       // Error containers
       errorAlert: '.alert-error, .alert-danger',
       formGroupErrors: '.form-group.has-error',
@@ -113,12 +109,6 @@ class LoginPage extends BasePage {
   verifyRequiredFieldErrors() {
     cy.logStep('Verifying required field errors');
     cy.get(this.elements.errorAlert).should('be.visible');
-  }
-
-  // Verify specific field error
-  verifyFieldError(field, expectedMessage) {
-    cy.logStep(`Verifying ${field} field error`);
-    cy.verifyFieldError(this.elements[field], expectedMessage);
   }
 
   // Clear login form

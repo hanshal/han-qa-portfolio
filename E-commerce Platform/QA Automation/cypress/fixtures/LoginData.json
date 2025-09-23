@@ -14,7 +14,7 @@
     },
     "bothInvalid": {
       "loginName": "invaliduser123",
-      "password": "wrongpassword"
+      "password": "Password123!"
     }
   },
   "emptyFields": {
@@ -47,10 +47,6 @@
   },
   "errorMessages": {
     "invalidCredentials": "Error: Incorrect login or password provided.",
-    "emptyFields": "Error: Incorrect login or password provided.",
-    "requiredFields": {
-      "loginName": "Login Name is required",
-      "password": "Password is required"
-    }
+    "emptyFields": "Error: Incorrect login or password provided."
   }
 }
