@@ -1,0 +1,56 @@
+{
+  "validUser": {
+    "loginName": "Houzour",
+    "password": "Password123!"
+  },
+  "invalidCredentials": {
+    "invalidUsername": {
+      "loginName": "invaliduser123",
+      "password": "Password123!"
+    },
+    "invalidPassword": {
+      "loginName": "Houzour",
+      "password": "WrongPassword123!"
+    },
+    "bothInvalid": {
+      "loginName": "invaliduser123",
+      "password": "wrongpassword"
+    }
+  },
+  "emptyFields": {
+    "emptyUsername": {
+      "loginName": "",
+      "password": "Password123!"
+    },
+    "emptyPassword": {
+      "loginName": "Houzour",
+      "password": ""
+    },
+    "bothEmpty": {
+      "loginName": "",
+      "password": ""
+    }
+  },
+  "edgeCases": {
+    "specialCharacters": {
+      "loginName": "test@#$%",
+      "password": "Password123!"
+    },
+    "longCredentials": {
+      "loginName": "verylongusernamethatexceedsnormallimits123456789",
+      "password": "verylongpasswordthatexceedsnormallimits123456789"
+    },
+    "shortCredentials": {
+      "loginName": "ab",
+      "password": "12"
+    }
+  },
+  "errorMessages": {
+    "invalidCredentials": "Error: Incorrect login or password provided.",
+    "emptyFields": "Error: Incorrect login or password provided.",
+    "requiredFields": {
+      "loginName": "Login Name is required",
+      "password": "Password is required"
+    }
+  }
+}
