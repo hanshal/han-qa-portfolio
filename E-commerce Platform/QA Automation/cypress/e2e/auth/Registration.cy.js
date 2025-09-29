@@ -18,8 +18,9 @@ describe('Registration Page Tests', () => {
 
   // Happy Path Tests
   describe('Successful Registration', () => {
+
     // TC_REG_001: Complete registration with all fields
-    it('Register a new user with valid complete data', () => {
+    it('Successfully register a new user with valid complete data', () => {
       cy.generateUniqueUserData(
         testData.validUser.personalDetails.email,
         testData.validUser.loginDetails.loginName
@@ -44,7 +45,7 @@ describe('Registration Page Tests', () => {
     });
 
     // TC_REG_002: Minimal data registration
-    it('Register a new user with minimal required data', () => {
+    it('Successfully register a new user with minimal required data', () => {
       cy.generateUniqueUserData(
         testData.minimalValidUser.personalDetails.email,
         testData.minimalValidUser.loginDetails.loginName
@@ -67,21 +68,20 @@ describe('Registration Page Tests', () => {
     });
   });
 
-  // Negative Tests
-  describe('Registration Validation Errors', () => {
+  // Form Validation Tests
+  describe('Form Validation', () => {
+    
     // TC_REG_003: Required field validation
-    it('Display error messages for all missing required fields', () => {
+    it('Show validation errors for all missing required fields', () => {
       registrationPage.submitForm();
       
       registrationPage.verifyRequiredFieldErrors(testData.errorMessages.requiredFields);
       registrationPage.verifyPrivacyPolicyError(testData.errorMessages.requiredFields.privacyPolicy);
       registrationPage.verifyFormGroupErrors();
-      
-      cy.takeScreenshot('validation-errors-all-fields');
     });
 
     // TC_REG_004: Password mismatch validation
-    it('Display error message when passwords do not match', () => {
+    it('Show validation error when passwords do not match', () => {
       cy.generateUniqueUserData(
         testData.validUser.personalDetails.email,
         testData.validUser.loginDetails.loginName
@@ -102,13 +102,15 @@ describe('Registration Page Tests', () => {
         
         registrationPage.completeRegistration(userData);
         registrationPage.verifyPasswordMismatchError(testData.errorMessages.requiredFields.passwordMismatch);
-        
-        cy.takeScreenshot('password-mismatch-error');
       });
     });
+  });
 
+  // Duplicate Data Prevention Tests
+  describe('Registration with Existing Data', () => {
+    
     // TC_REG_005: Duplicate email prevention
-    it('Display error message when registering with existing email address', () => {
+    it('Display error message for existing email address', () => {
       cy.generateUniqueUserData(
         testData.validUser.personalDetails.email,
         testData.validUser.loginDetails.loginName
@@ -128,13 +130,11 @@ describe('Registration Page Tests', () => {
         
         registrationPage.completeRegistration(userData);
         registrationPage.verifyExistingEmailError(testData.errorMessages.existingData.existingEmail);
-        
-        cy.takeScreenshot('existing-email-error');
       });
     });
 
     // TC_REG_006: Duplicate username prevention
-    it('Display error message when registering with existing username', () => {
+    it('Display error message for existing username', () => {
       cy.generateUniqueUserData(
         testData.validUser.personalDetails.email,
         testData.validUser.loginDetails.loginName
@@ -154,12 +154,11 @@ describe('Registration Page Tests', () => {
         
         registrationPage.completeRegistration(userData);
         registrationPage.verifyExistingUsernameError(testData.errorMessages.existingData.existingUsername);
-        
-        cy.takeScreenshot('existing-username-error');
       });
     });
   });
 
+  // Cleanup after each test
   afterEach(() => {
     cy.clearCookies();
     cy.clearLocalStorage();

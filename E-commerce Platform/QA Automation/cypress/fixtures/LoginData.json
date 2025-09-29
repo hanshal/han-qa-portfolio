@@ -1,0 +1,45 @@
+{
+  "validUsers": {
+    "existingUser": {
+      "username": "Houzour",
+      "email": "hanshal.hn@gmail.com",
+      "password": "houzour98"
+    }
+  },
+  "invalidCredentials": {
+    "invalidUsername": {
+      "username": "nonexistentuser123",
+      "password": "SecurePass789!"
+    },
+    "invalidPassword": {
+      "username": "Houzour",
+      "password": "wrongpassword123"
+    },
+    "bothInvalid": {
+      "username": "invaliduser",
+      "password": "wrongpass"
+    }
+  },
+  "emptyFields": {
+    "emptyUsername": {
+      "username": "",
+      "password": "SecurePass789!"
+    },
+    "emptyPassword": {
+      "username": "Houzour",
+      "password": ""
+    },
+    "bothEmpty": {
+      "username": "",
+      "password": ""
+    }
+  },
+  "errorMessages": {
+    "invalidCredentials": "Error: Incorrect login or password provided.",
+    "emptyFields": "Error: Incorrect login or password provided."
+  },
+  "recoveryLinks": {
+    "forgotPassword": "forgotten/password",
+    "forgotLogin": "forgotten/loginname"
+  }
+}
