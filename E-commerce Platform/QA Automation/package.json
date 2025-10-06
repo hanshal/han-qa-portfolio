@@ -11,7 +11,13 @@
     "cypress:run:firefox": "cypress run --browser firefox",
     "cypress:run:edge": "cypress run --browser edge",
     "test:all": "cypress run --spec \"cypress/e2e/**/*.cy.js\"",
-    "test:auth": "cypress run --spec \"cypress/e2e/auth/*.cy.js\""
+    "test:auth": "cypress run --spec \"cypress/e2e/auth/*.cy.js\"",
+    "test:bdd": "cypress run --spec \"cypress/e2e/**/*.feature\"",
+    "test:bdd:auth": "cypress run --spec \"cypress/e2e/auth/*.feature\"",
+    "test:bdd:login": "cypress run --spec \"cypress/e2e/auth/Login.feature\"",
+    "test:bdd:registration": "cypress run --spec \"cypress/e2e/auth/Registration.feature\"",
+    "test:traditional": "cypress run --spec \"cypress/e2e/**/*.cy.js\"",
+    "test:all-formats": "npm run test:traditional && npm run test:bdd"
   },
   "keywords": [
     "cypress",
@@ -24,6 +30,9 @@
   "author": "Han QA Engineer",
   "license": "MIT",
   "devDependencies": {
-    "cypress": "^14.5.3"
+    "@badeball/cypress-cucumber-preprocessor": "^23.2.0",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.6",
+    "cypress": "^14.5.3",
+    "dotenv": "^17.2.3"
   }
 }

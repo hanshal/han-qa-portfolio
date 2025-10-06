@@ -1,4 +1,7 @@
 const { defineConfig } = require('cypress')
+const createBundler = require('@bahmutov/cypress-esbuild-preprocessor')
+const { addCucumberPreprocessorPlugin } = require('@badeball/cypress-cucumber-preprocessor')
+const { createEsbuildPlugin } = require('@badeball/cypress-cucumber-preprocessor/esbuild')
 
 // Cypress E2E Testing Configuration
 module.exports = defineConfig({
@@ -10,7 +13,10 @@ module.exports = defineConfig({
     viewportHeight: 720,
     
     // File patterns and locations
-    specPattern: 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}',
+    specPattern: [
+      'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}',
+      'cypress/e2e/**/*.feature'
+    ],
     supportFile: 'cypress/support/e2e.js',
     fixturesFolder: 'cypress/fixtures',
     
@@ -40,7 +46,14 @@ module.exports = defineConfig({
     
     chromeWebSecurity: false,
 
-    setupNodeEvents(on, config) {
+    async setupNodeEvents(on, config) {
+      const bundler = createBundler({
+        plugins: [createEsbuildPlugin(config)],
+      })
+
+      on('file:preprocessor', bundler)
+      await addCucumberPreprocessorPlugin(on, config)
+      
       on('task', {
         log(message) {
           console.log(message)
