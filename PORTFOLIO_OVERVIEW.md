@@ -17,10 +17,12 @@
 ## 🏆 Highlights & Achievements
 
 - **Engineered 3 chained Claude Code agentic skills** (Blast Radius Analysis, Pre-QA Review, QA Test Paths) deployed on every PR across a 5-domain jobs platform for 2+ consecutive months
-- **Built and maintain a Cypress overnight regression suite of 200+ test cases**, reducing full regression execution time by ~70% and eliminating manual regression cycles before each release
+- **Built and maintain a Cypress overnight regression suite of 500+ test cases** spanning regression and SEO validation, reducing full regression execution time by ~70% and eliminating manual regression cycles before each release
 - **Sole QA owner across 5 live production domains** (Africa & Romania) — full lifecycle from requirements review to post-release validation, with no QA backup
 - **Designed an end-to-end agentic self-healing pipeline**: Playwright MCP inspects live locators, reruns tests, diagnoses failures, applies fixes, and auto-posts summaries to Jira
 - **Developed a custom Claude Code skill** for Cypress test suite refactoring — enforces project-specific best practices, eliminates redundancy, and strengthens assertions at scale
+- **Executed SEO testing** as part of every release — metadata, structured data, crawlability, and Core Web Vitals validated across all domains
+- **Applied security testing** through bug bounty participation — identifying and confirming vulnerabilities on live production domains and validating fixes
 - **Led Bug Bash sessions and QA retrospectives** driving quality culture across engineering teams
 - **Mentored QA interns** on modern testing practices and AI-assisted workflows
 - **Built a full-stack internal security tool** (Angular + C# + .NET) replacing a fully manual process
@@ -66,7 +68,7 @@
 
 | Category | Tools & Technologies |
 |---|---|
-| **QA & Testing** | Manual, Functional, Regression, Exploratory, E2E, Cross-Browser, API, UI/UX, Risk-Based, Shift-Left, Agile, SEO Validation |
+| **QA & Testing** | Manual, Functional, Regression, Exploratory, E2E, Cross-Browser, API, UI/UX, Risk-Based, Shift-Left, Agile, SEO Testing, Security Testing |
 | **Automation & Frameworks** | Cypress (JavaScript), Selenium (C#), Playwright, BDD (Gherkin/Cucumber), Ranorex |
 | **AI & Agentic Tooling** | Claude Code, Agentic Workflows, Claude Cowork, GitHub Copilot, ChatGPT, OpenAI Codex, Playwright MCP |
 | **Tools & Test Management** | TestRail, Jira, Postman, BrowserStack, Swagger, GitHub |
@@ -122,6 +124,8 @@ End-to-end pipeline designed to close the loop between test failure and fix:
 - **Risk-Based Planning**: Coverage prioritised by impact and likelihood of failure
 - **Agentic Automation**: AI pipelines that reduce manual overhead and standardise handoffs
 - **BDD Collaboration**: Gherkin scenarios as a shared language between dev, QA, and product
+- **SEO Testing**: Metadata, structured data, crawlability, and Core Web Vitals validated as part of every release sign-off
+- **Security Testing**: Bug bounty participation to identify and confirm vulnerabilities on live domains; validates fixes against common web security issues
 - **Analytics-Driven**: Production signals from Datadog, Clarity, and GSC feed back into test strategy
 
 ---
@@ -131,7 +135,7 @@ End-to-end pipeline designed to close the loop between test failure and fix:
 ✅ **ISTQB Certified** with 5+ years across multi-domain, multi-tenant platforms
 ✅ **Agentic AI Builder**: Designs and ships Claude Code pipelines that replace manual QA prep work — not just prompts existing tools
 ✅ **Sole QA ownership**: Proven ability to own full QA lifecycle across 5 live domains with no backup
-✅ **200+ automated tests**: Cypress regression suite cutting release cycle time by ~70%
+✅ **500+ automated tests**: Cypress suite spanning regression and SEO validation, cutting release cycle time by ~70%
 ✅ **Full-stack capable**: Angular + C# + .NET beyond traditional QA scope
 ✅ **Shift-Left practitioner**: Risk-based, early-involvement QA embedded in sprint workflow
 ✅ **Team multiplier**: Mentors interns, leads Bug Bash, and drives quality culture
