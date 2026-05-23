@@ -1,6 +1,6 @@
 # Hanshal Nursinghdass – QA Engineering Portfolio
 
-> **ISTQB Certified QA Engineer** with 5+ years experience building agentic AI workflows,
+> **ISTQB Certified Senior QA Engineer** with 5+ years experience building agentic AI workflows,
 > scalable test automation frameworks, and delivering quality assurance across multi-domain
 > digital platforms.
 
@@ -141,7 +141,7 @@ End-to-end pipeline designed to close the loop between test failure and fix:
 
 ## 🎯 What I Bring to Your Team
 
-✅ **ISTQB Certified** with 5+ years across multi-domain, multi-tenant platforms
+✅ **ISTQB Certified Senior QA Engineer** with 5+ years across multi-domain, multi-tenant platforms
 ✅ **Agentic AI Builder**: Designs and ships Claude Code pipelines that replace manual QA prep work — not just prompts existing tools
 ✅ **Sole QA ownership**: Proven ability to own full QA lifecycle across 5 live domains with no backup
 ✅ **500+ automated tests**: Cypress suite spanning regression and SEO validation, cutting release cycle time by ~70%
